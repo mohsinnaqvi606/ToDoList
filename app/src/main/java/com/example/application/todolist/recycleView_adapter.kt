@@ -1,7 +1,6 @@
 package com.example.application.todolist
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -9,7 +8,6 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 
 private val myarray = arrayOf("Update", "Delete", "red")
@@ -32,9 +30,9 @@ class recycleView_adapter(val context: Context, val userList: ArrayList<User>) :
 
         holder.textViewName.text = userList[position].value
 
-        if(userList[position].tick_value.equals("0")){
+        if (userList[position].tick_value.equals("0")) {
             holder.img_tick.visibility = INVISIBLE
-        }else{
+        } else {
             holder.img_tick.visibility = VISIBLE
         }
 
@@ -50,7 +48,9 @@ class recycleView_adapter(val context: Context, val userList: ArrayList<User>) :
                     notifyItemRemoved(position)
                     notifyDataSetChanged()
                 }
-                Toast.makeText(context, myarray[which], Toast.LENGTH_LONG).show()
+
+                if (myarray[which].equals("Update")) {
+                }
             }
 
             val dialog = builder.create()
@@ -60,13 +60,22 @@ class recycleView_adapter(val context: Context, val userList: ArrayList<User>) :
 
         holder.parent_layout.setOnLongClickListener {
 
-            if(holder.img_tick.visibility == View.INVISIBLE){
+            var databaseHandler: DatabaseHandler = DatabaseHandler(context)
+            var user: User = userList[position]
+
+            if (holder.img_tick.visibility == View.INVISIBLE) {
                 holder.img_tick.visibility = VISIBLE
-            }else{
+                user.tick_value = "1"
+            } else {
                 holder.img_tick.visibility = INVISIBLE
+                user.tick_value = "0"
             }
 
-        //    Toast.makeText(context, "wrr ja", Toast.LENGTH_LONG).show()
+            databaseHandler.updateValues(user)
+            userList[position] = user
+            notifyItemChanged(position)
+            notifyDataSetChanged()
+
             return@setOnLongClickListener true
         }
 

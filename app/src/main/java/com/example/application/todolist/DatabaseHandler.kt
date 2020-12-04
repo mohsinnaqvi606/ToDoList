@@ -69,7 +69,8 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, ToDoList_Dat
     fun updateValues(a: User): Int {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(value, a.value) // EmpModelClass Name
+        contentValues.put(value, a.value)
+        contentValues.put(tick_value, a.tick_value)
 
         // Updating Row
         val success = db.update(ToDoList_Table, contentValues, "id=" + a.id, null)
