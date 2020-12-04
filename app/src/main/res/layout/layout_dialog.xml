@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0000ff"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Add Item" />
+
+    <EditText
+        android:layout_marginTop="5dp"
+        android:id="@+id/et_addItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:hint="New Item"
+        android:textSize="22sp"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:layout_below="@+id/tv_title"/>
+
+    <Button
+        android:id="@+id/bt_done"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_addItem"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="Add" />
+
+</RelativeLayout>
